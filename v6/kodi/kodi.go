@@ -13,7 +13,7 @@ type request struct {
 	Jsonrpc string      `json:"jsonrpc"`
 	Method  string      `json:"method"`
 	Id      string      `json:"id"`
-	Params  interface{} `json:"params"`
+	Params  interface{} `json:"params,omitempty"`
 }
 
 type ErrorStack struct {
@@ -48,6 +48,7 @@ type Kodi struct {
 	password string
 
 	VideoLibrary *VideoLibrary
+	Playlist     *Playlist
 }
 
 func (k *Kodi) postRequest(r interface{}) (*http.Response, error) {
@@ -94,5 +95,6 @@ func New(address, username, password string) *Kodi {
 	}
 
 	k.VideoLibrary = &VideoLibrary{k: k}
+	k.Playlist = &Playlist{k: k}
 	return k
 }

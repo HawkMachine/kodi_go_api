@@ -27,13 +27,13 @@ func main() {
 
 	sinceDate := time.Now().Add(-*duration)
 
-	epResult, err := k.VideoLibrary.GetEpisodes(&kodi.GetEpisodesParams{
+	epResult, err := k.VideoLibrary.GetEpisodes(&kodi.VideoLibraryGetEpisodesParams{
 		Properties: []kodi.VideoFieldsEpisode{
 			kodi.EPISODE_FIELD_SHOW_TITLE,
 			kodi.EPISODE_FIELD_TITLE,
 			kodi.EPISODE_FIELD_LAST_PLAYED,
 		},
-		Filter: &kodi.GetEpisodesFilter{
+		Filter: &kodi.VideoLibraryGetEpisodesFilter{
 			ListFilterEpisodes: &kodi.ListFilterEpisodes{
 				ListFilterRuleEpisodes: &kodi.ListFilterRuleEpisodes{
 					Field:    kodi.EPISODE_FILTER_FIELD_LAST_PLAYED,
