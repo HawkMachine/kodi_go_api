@@ -438,6 +438,11 @@ type PlayerId int
 
 // This is just my guess, but id has to be 0, 1 or 2.
 const (
+	PLAYER_ID_0 PlayerId = 0
+	PLAYER_ID_1 PlayerId = 1
+	PLAYER_ID_2 PlayerId = 2
+
+	// This is just my guess...
 	PLAYER_AUDIO_ID   PlayerId = 0
 	PLAYER_VIDEO_ID   PlayerId = 1
 	PLAYER_PICTURE_ID PlayerId = 2
@@ -449,8 +454,12 @@ const (
 
 type PlaylistId int
 
-// This is just my guess, but id has to be 0, 1 or 2.
 const (
+	PLAYLIST_ID_0 PlaylistId = 0
+	PLAYLIST_ID_1 PlaylistId = 1
+	PLAYLIST_ID_2 PlaylistId = 2
+
+	// This is just my guess...
 	PLAYLIST_AUDIO_ID   PlaylistId = 0
 	PLAYLIST_VIDEO_ID   PlaylistId = 1
 	PLAYLIST_PICTURE_ID PlaylistId = 2
@@ -460,15 +469,15 @@ const (
 
 type PlaylistItem struct {
 	// one of
-	File         *string    `json:"file"`
-	Director     *string    `json:"director"`
-	MovieId      *LibraryId `json:"movieid"`
-	EpisodeId    *LibraryId `json:"episodeid"`
-	MusicVideoId *LibraryId `json:"musicvideoid"`
-	ArtistId     *LibraryId `json:"artistid"`
-	AlbumId      *LibraryId `json:"albumid"`
-	SongId       *LibraryId `json:"songid"`
-	GenreId      *LibraryId `json:"genreid"`
+	File         *string    `json:"file,omitempty"`
+	Director     *string    `json:"director,omitempty"`
+	MovieId      *LibraryId `json:"movieid,omitempty"`
+	EpisodeId    *LibraryId `json:"episodeid,omitempty"`
+	MusicVideoId *LibraryId `json:"musicvideoid,omitempty"`
+	ArtistId     *LibraryId `json:"artistid,omitempty"`
+	AlbumId      *LibraryId `json:"albumid,omitempty"`
+	SongId       *LibraryId `json:"songid,omitempty"`
+	GenreId      *LibraryId `json:"genreid,omitempty"`
 }
 
 // 6.18.4 http://kodi.wiki/view/JSON-RPC_API/v6#Playlist.Property.Name

@@ -19,8 +19,11 @@ func (p *Playlist) doRPC(rpcName string, params interface{}, response interface{
 // Playlist.Add
 
 type PlaylistAddParams struct {
-	PlaylistId   PlaylistId   `json:"playlistid"`
-	PlaylistItem PlaylistItem `json:"playlistitem"`
+	PlaylistId PlaylistId `json:"playlistid"`
+	// TODO: http://kodi.wiki/view/JSON-RPC_API/v6#Playlist.Add claims that item
+	// below is just a single value, but from Kodi's responses it looks like it
+	// accepts a list too.
+	Item PlaylistItem `json:"item"`
 }
 
 type PlaylistAddResult string
