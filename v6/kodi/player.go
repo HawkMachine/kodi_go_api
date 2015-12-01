@@ -10,7 +10,7 @@ func (p *Player) doRPC(rpcName string, params interface{}, response interface{})
 	req := &request{
 		Jsonrpc: "2.0",
 		Method:  "Player." + rpcName,
-		Id:      "1",
+		Id:      1,
 		Params:  params,
 	}
 	return p.k.doRPC(req, response)

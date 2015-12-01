@@ -9,7 +9,7 @@ func (vl *VideoLibrary) doRPC(rpcName string, params interface{}, response inter
 	req := &request{
 		Jsonrpc: "2.0",
 		Method:  "VideoLibrary." + rpcName,
-		Id:      "1",
+		Id:      1,
 		Params:  params,
 	}
 	return vl.k.doRPC(req, response)

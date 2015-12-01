@@ -33,6 +33,18 @@ type AudioDetailsBase struct {
 type AudioDetailsMedia struct {
 }
 
+// 6.6 List http://kodi.wiki/view/JSON-RPC_API/v6#Files
+
+type FilesMedia string
+
+const (
+	FILES_MEDIA_VIDEO    FilesMedia = "video"
+	FILES_MEDIA_MUSIC    FilesMedia = "music"
+	FILES_MEDIA_PICTURES FilesMedia = "pictires"
+	FILES_MEDIA_FILES    FilesMedia = "files"
+	FILES_MEDIA_PROGRAMS FilesMedia = "programs"
+)
+
 // 6.12 List http://kodi.wiki/view/JSON-RPC_API/v6#List
 
 type ListFieldsAll string
@@ -112,46 +124,119 @@ const (
 	LIST_FILTER_FIELD_END_TIME                     ListFieldsAll = "endtime"
 )
 
-type ListSortmethod string
+type ListFieldsFiles string
 
 const (
-	SORT_METHOD_NONE             ListSortmethod = "none"
-	SORT_METHOD_LABEL            ListSortmethod = "label"
-	SORT_METHOD_DATE             ListSortmethod = "date"
-	SORT_METHOD_SIZE             ListSortmethod = "size"
-	SORT_METHOD_FILE             ListSortmethod = "file"
-	SORT_METHOD_PATH             ListSortmethod = "path"
-	SORT_METHOD_DRIVE_TYPE       ListSortmethod = "drivetype"
-	SORT_METHOD_TITLE            ListSortmethod = "title"
-	SORT_METHOD_TRACK            ListSortmethod = "track"
-	SORT_METHOD_TIME             ListSortmethod = "time"
-	SORT_METHOD_ARTIST           ListSortmethod = "artist"
-	SORT_METHOD_ALBUM            ListSortmethod = "album"
-	SORT_METHOD_ALBUM_TYPE       ListSortmethod = "albumtype"
-	SORT_METHOD_GENRE            ListSortmethod = "genre"
-	SORT_METHOD_COUNTRY          ListSortmethod = "country"
-	SORT_METHOD_YEAR             ListSortmethod = "year"
-	SORT_METHOD_RATING           ListSortmethod = "rating"
-	SORT_METHOD_VOTES            ListSortmethod = "votes"
-	SORT_METHOD_TOP250           ListSortmethod = "top250"
-	SORT_METHOD_PROGRAM_COUNT    ListSortmethod = "programcount"
-	SORT_METHOD_PLAYLIST         ListSortmethod = "playlist"
-	SORT_METHOD_EPISODE          ListSortmethod = "episode"
-	SORT_METHOD_SEASON           ListSortmethod = "season"
-	SORT_METHOD_TOTAL_EPISODES   ListSortmethod = "totalepisode"
-	SORT_METHOD_WATCHED_EPISODES ListSortmethod = "watchedepisodes"
-	SORT_METHOD_TV_SHOW_STATUS   ListSortmethod = "tvshowstatus"
-	SORT_METHOD_TV_SHOW_TITLE    ListSortmethod = "tvshowtitle"
-	SORT_METHOD_SORT_TITLE       ListSortmethod = "sorttitle"
-	SORT_METHOD_PRODUCTION_CODE  ListSortmethod = "productioncode"
-	SORT_METHOD_MPAA             ListSortmethod = "mpaa"
-	SORT_METHOD_STUDIO           ListSortmethod = "studio"
-	SORT_METHOD_DATE_ADDED       ListSortmethod = "dataadded"
-	SORT_METHOD_LAST_PLAYED      ListSortmethod = "lastplayed"
-	SORT_METHOD_PLAY_COUNT       ListSortmethod = "playcount"
-	SORT_METHOD_LISTENERS        ListSortmethod = "listeners"
-	SORT_METHOD_BIT_RATE         ListSortmethod = "bitrate"
-	SORT_METHOD_RANDOM           ListSortmethod = "random"
+	FILE_FIELD_TITLE                       ListFieldsFiles = "title"
+	FILE_FIELD_ARTIST                      ListFieldsFiles = "artist"
+	FILE_FIELD_ALBUMARTIST                 ListFieldsFiles = "albumartist"
+	FILE_FIELD_GENRE                       ListFieldsFiles = "genre"
+	FILE_FIELD_YEAR                        ListFieldsFiles = "year"
+	FILE_FIELD_RATING                      ListFieldsFiles = "rating"
+	FILE_FIELD_ALBUM                       ListFieldsFiles = "album"
+	FILE_FIELD_TRACK                       ListFieldsFiles = "track"
+	FILE_FIELD_DURATION                    ListFieldsFiles = "duration"
+	FILE_FIELD_COMMENT                     ListFieldsFiles = "comment"
+	FILE_FIELD_LYRICS                      ListFieldsFiles = "lyrics"
+	FILE_FIELD_MUSICBRAINZ_TRACK_ID        ListFieldsFiles = "musicbrainztrackid"
+	FILE_FIELD_MUSICBRAINZ_ARTIST_ID       ListFieldsFiles = "musicbrainzartistid"
+	FILE_FIELD_MUSICBRAINZ_ALBUM_ID        ListFieldsFiles = "musicbrainzalbumid"
+	FILE_FIELD_MUSICBRAINZ_ALBUM_ARTIST_ID ListFieldsFiles = "musicbrainzalbumartistid"
+	FILE_FIELD_PLAY_COUNT                  ListFieldsFiles = "playcount"
+	FILE_FIELD_FANART                      ListFieldsFiles = "fanart"
+	FILE_FIELD_DIRECTOR                    ListFieldsFiles = "director"
+	FILE_FIELD_TRAILER                     ListFieldsFiles = "trailer"
+	FILE_FIELD_TAGLINE                     ListFieldsFiles = "tagline"
+	FILE_FIELD_PLOT                        ListFieldsFiles = "plot"
+	FILE_FIELD_PLOT_OUTLINE                ListFieldsFiles = "plotoutline"
+	FILE_FIELD_ORIGINAL_TITLE              ListFieldsFiles = "originaltitle"
+	FILE_FIELD_LAST_PLAYED                 ListFieldsFiles = "lastplayed"
+	FILE_FIELD_WRITER                      ListFieldsFiles = "writer"
+	FILE_FIELD_STUDIO                      ListFieldsFiles = "studio"
+	FILE_FIELD_MPAA                        ListFieldsFiles = "mpaa"
+	FILE_FIELD_CAST                        ListFieldsFiles = "cast"
+	FILE_FIELD_COUNTRY                     ListFieldsFiles = "country"
+	FILE_FIELD_IMDB_NUMBER                 ListFieldsFiles = "imdbnumber"
+	FILE_FIELD_PREMIERED                   ListFieldsFiles = "premiered"
+	FILE_FIELD_PRODUCTION_CODE             ListFieldsFiles = "productioncode"
+	FILE_FIELD_RUNTIME                     ListFieldsFiles = "runtime"
+	FILE_FIELD_SET                         ListFieldsFiles = "set"
+	FILE_FIELD_SHOW_LINK                   ListFieldsFiles = "showlink"
+	FILE_FIELD_STREAM_DETAILS              ListFieldsFiles = "streamdetails"
+	FILE_FIELD_TOP250                      ListFieldsFiles = "top250"
+	FILE_FIELD_VOTES                       ListFieldsFiles = "votes"
+	FILE_FIELD_FIRST_AIRED                 ListFieldsFiles = "firstaired"
+	FILE_FIELD_SEASON                      ListFieldsFiles = "season"
+	FILE_FIELD_EPISODE                     ListFieldsFiles = "episode"
+	FILE_FIELD_SHOW_TITLE                  ListFieldsFiles = "showtitle"
+	FILE_FIELD_THUMBNAIL                   ListFieldsFiles = "thumbnail"
+	FILE_FIELD_FILE                        ListFieldsFiles = "file"
+	FILE_FIELD_RESUME                      ListFieldsFiles = "resume"
+	FILE_FIELD_ARTIST_ID                   ListFieldsFiles = "artistid"
+	FILE_FIELD_ALBUM_ID                    ListFieldsFiles = "albumid"
+	FILE_FIELD_TV_SHOW_ID                  ListFieldsFiles = "tvshowid"
+	FILE_FIELD_SET_ID                      ListFieldsFiles = "setid"
+	FILE_FIELD_WATCHED_EPISODES            ListFieldsFiles = "watchedepisodes"
+	FILE_FIELD_DISC                        ListFieldsFiles = "disc"
+	FILE_FIELD_TAG                         ListFieldsFiles = "tag"
+	FILE_FIELD_ART                         ListFieldsFiles = "art"
+	FILE_FIELD_GENREID                     ListFieldsFiles = "genreid"
+	FILE_FIELD_DISPLAY_ARTIST              ListFieldsFiles = "displayartist"
+	FILE_FIELD_ALBUM_ARTIST_ID             ListFieldsFiles = "albumartistid"
+	FILE_FIELD_DESCRIPTION                 ListFieldsFiles = "description"
+	FILE_FIELD_THEME                       ListFieldsFiles = "theme"
+	FILE_FIELD_MOOD                        ListFieldsFiles = "mood"
+	FILE_FIELD_STYLE                       ListFieldsFiles = "style"
+	FILE_FIELD_ALBUM_LABEL                 ListFieldsFiles = "albumlabel"
+	FILE_FIELD_SORT_TITLE                  ListFieldsFiles = "sorttitle"
+	FILE_FIELD_EPISODE_GUIDE               ListFieldsFiles = "episodeguide"
+	FILE_FIELD_UNIQUE_ID                   ListFieldsFiles = "uniqueid"
+	FILE_FIELD_DATE_ADDED                  ListFieldsFiles = "dateadded"
+	FILE_FIELD_SIZE                        ListFieldsFiles = "size"
+	FILE_FIELD_LAST_MODIFIED               ListFieldsFiles = "lastmodified"
+	FILE_FIELD_MIMETYPE                    ListFieldsFiles = "mimetype"
+)
+
+type ListSortMethod string
+
+const (
+	SORT_METHOD_NONE             ListSortMethod = "none"
+	SORT_METHOD_LABEL            ListSortMethod = "label"
+	SORT_METHOD_DATE             ListSortMethod = "date"
+	SORT_METHOD_SIZE             ListSortMethod = "size"
+	SORT_METHOD_FILE             ListSortMethod = "file"
+	SORT_METHOD_PATH             ListSortMethod = "path"
+	SORT_METHOD_DRIVE_TYPE       ListSortMethod = "drivetype"
+	SORT_METHOD_TITLE            ListSortMethod = "title"
+	SORT_METHOD_TRACK            ListSortMethod = "track"
+	SORT_METHOD_TIME             ListSortMethod = "time"
+	SORT_METHOD_ARTIST           ListSortMethod = "artist"
+	SORT_METHOD_ALBUM            ListSortMethod = "album"
+	SORT_METHOD_ALBUM_TYPE       ListSortMethod = "albumtype"
+	SORT_METHOD_GENRE            ListSortMethod = "genre"
+	SORT_METHOD_COUNTRY          ListSortMethod = "country"
+	SORT_METHOD_YEAR             ListSortMethod = "year"
+	SORT_METHOD_RATING           ListSortMethod = "rating"
+	SORT_METHOD_VOTES            ListSortMethod = "votes"
+	SORT_METHOD_TOP250           ListSortMethod = "top250"
+	SORT_METHOD_PROGRAM_COUNT    ListSortMethod = "programcount"
+	SORT_METHOD_PLAYLIST         ListSortMethod = "playlist"
+	SORT_METHOD_EPISODE          ListSortMethod = "episode"
+	SORT_METHOD_SEASON           ListSortMethod = "season"
+	SORT_METHOD_TOTAL_EPISODES   ListSortMethod = "totalepisode"
+	SORT_METHOD_WATCHED_EPISODES ListSortMethod = "watchedepisodes"
+	SORT_METHOD_TV_SHOW_STATUS   ListSortMethod = "tvshowstatus"
+	SORT_METHOD_TV_SHOW_TITLE    ListSortMethod = "tvshowtitle"
+	SORT_METHOD_SORT_TITLE       ListSortMethod = "sorttitle"
+	SORT_METHOD_PRODUCTION_CODE  ListSortMethod = "productioncode"
+	SORT_METHOD_MPAA             ListSortMethod = "mpaa"
+	SORT_METHOD_STUDIO           ListSortMethod = "studio"
+	SORT_METHOD_DATE_ADDED       ListSortMethod = "dataadded"
+	SORT_METHOD_LAST_PLAYED      ListSortMethod = "lastplayed"
+	SORT_METHOD_PLAY_COUNT       ListSortMethod = "playcount"
+	SORT_METHOD_LISTENERS        ListSortMethod = "listeners"
+	SORT_METHOD_BIT_RATE         ListSortMethod = "bitrate"
+	SORT_METHOD_RANDOM           ListSortMethod = "random"
 )
 
 type ListFilterFieldsMovies string
@@ -279,9 +364,9 @@ const (
 )
 
 type ListSort struct {
-	Order         string `json:"order"`
-	Ignorearticle bool   `json:"ignorearticle"`
-	Method        string `json:"method"`
+	Order         string         `json:"order,omitempty"`
+	Ignorearticle bool           `json:"ignorearticle,omitempty"`
+	Method        ListSortMethod `json:"method,omitempty"`
 }
 
 type ListFilterRuleTVShows struct {
@@ -323,7 +408,21 @@ type ListFilterEpisodes struct {
 	Or  []*ListFilterEpisodes `json:"or,omitempty"`
 }
 
+// 6.12.27 http://kodi.wiki/view/JSON-RPC_API/v6#List.Item.All
+
+type ListItemAll struct {
+	ListItemBase
+	Channeltype   PVRChannelType `json:"channeltype,omitempty"`
+	Channel       string         `json:"channel,omitempty"`
+	StartTime     string         `json:"starttime,omitempty"`
+	EndTime       string         `json:"endtime,omitempty"`
+	ChannelNumber int            `json:"channelnumber,omitempty"`
+	Hidden        bool           `json:"hidden,omitempty"`
+	Locked        bool           `json:"locked,omitempty"`
+}
+
 // 6.12.28 http://kodi.wiki/view/JSON-RPC_API/v6#List.Item.Base
+
 type ListItemBase struct {
 	AudioDetailsMedia
 	VideoDetailsFile
@@ -374,22 +473,32 @@ type ListItemBase struct {
 	IMDBNumber          string              `json:"imdbnumber,omitempty,omitempty"`
 }
 
-// 6.12.27 http://kodi.wiki/view/JSON-RPC_API/v6#List.Item.All
-type ListItemAll struct {
+// 6.12.29 http://kodi.wiki/view/JSON-RPC_API/v6#List.Item.File
+
+type ListItemFile struct {
 	ListItemBase
-	Channeltype   PVRChannelType `json:"channeltype,omitempty"`
-	Channel       string         `json:"channel,omitempty"`
-	StartTime     string         `json:"starttime,omitempty"`
-	EndTime       string         `json:"endtime,omitempty"`
-	ChannelNumber int            `json:"channelnumber,omitempty"`
-	Hidden        bool           `json:"hidden,omitempty"`
-	Locked        bool           `json:"locked,omitempty"`
+	Filetype     string `json:"filetype"`
+	Size         int64  `json:"size,omitempty"`
+	Mimetype     string `json:"mimetype"`
+	File         string `json:"file"`
+	LastModified string `json:"lastmodified,omitempty"`
 }
+
+// 6.12.30 http://kodi.wiki/view/JSON-RPC_API/v6#List.Items.Source
+
+type ListItemsSource struct {
+	ItemDetailsBase
+	File string `json:"file"`
+}
+
+// 6.12.31 http://kodi.wiki/view/JSON-RPC_API/v6#List.Limits
 
 type ListLimits struct {
 	Start int `json:"start,omitempty"`
 	End   int `json:"end,omitempty"`
 }
+
+// 6.12.32 http://kodi.wiki/view/JSON-RPC_API/v6#List.Limits.Returned
 
 type ListLimitsReturned struct {
 	Total int `json:"total"`

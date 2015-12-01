@@ -12,7 +12,7 @@ import (
 type request struct {
 	Jsonrpc string      `json:"jsonrpc"`
 	Method  string      `json:"method"`
-	Id      string      `json:"id"`
+	Id      int64       `json:"id"`
 	Params  interface{} `json:"params,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type ResponseError struct {
 type ResponseBase struct {
 	Jsonrpc string         `json:"jsonrpc,omitempty"`
 	Method  string         `json:"method,omitempty"`
-	Id      string         `json:"id,omitempty"`
+	Id      int64          `json:"id,omitempty"`
 	Error   *ResponseError `json:"error,omitempty"`
 }
 
@@ -49,6 +49,7 @@ type Kodi struct {
 
 	VideoLibrary *VideoLibrary
 	Playlist     *Playlist
+	Files        *Files
 }
 
 func (k *Kodi) postRequest(r interface{}) (*http.Response, error) {
@@ -67,6 +68,7 @@ func (k *Kodi) postRequest(r interface{}) (*http.Response, error) {
 
 	response, err := cli.Do(req)
 	glog.V(3).Infof("KODI POST RESPONSE : %v\n", response)
+	glog.V(3).Infof("KODI POST ERROR    : %v\n", err)
 
 	return response, err
 }
@@ -96,5 +98,6 @@ func New(address, username, password string) *Kodi {
 
 	k.VideoLibrary = &VideoLibrary{k: k}
 	k.Playlist = &Playlist{k: k}
+	k.Files = &Files{k: k}
 	return k
 }
