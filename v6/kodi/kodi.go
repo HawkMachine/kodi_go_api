@@ -64,7 +64,9 @@ func (k *Kodi) postRequest(r interface{}) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.SetBasicAuth(k.username, k.password)
+	if k.username != "" && k.password != "" {
+		req.SetBasicAuth(k.username, k.password)
+	}
 
 	response, err := cli.Do(req)
 	glog.V(3).Infof("KODI POST RESPONSE : %v\n", response)
