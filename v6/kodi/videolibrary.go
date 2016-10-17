@@ -226,3 +226,24 @@ func (vl *VideoLibrary) GetSeasons(params *VideoLibraryGetSeasonsParams) (*Video
 	}
 	return response, nil
 }
+
+// 5.12 VideoLibrary.Scan
+
+type VideoLibraryScanParams struct {
+	Directory   string `json:"directory,omitempty"`
+	ShowDialogs bool   `json:"showdialogs,omitempty"`
+}
+
+type VideoLibraryScanResponse struct {
+	ResVponseBase
+	Result string `json:"result,omitempty"`
+}
+
+func (vl *VideoLibrary) Scan(params *VideoLibraryScanParams) (*VideoLibraryScanResponse, error) {
+	response := &VideoLibraryScanResponse{}
+	err := vl.doRPC("Scan", params, response)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
+}
