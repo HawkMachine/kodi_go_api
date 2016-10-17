@@ -235,7 +235,7 @@ type VideoLibraryScanParams struct {
 }
 
 type VideoLibraryScanResponse struct {
-	ResVponseBase
+	ResponseBase
 	Result string `json:"result,omitempty"`
 }
 
